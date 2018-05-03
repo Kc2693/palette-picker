@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+     <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <title>Palette Picker</title>
+  </head>
+  <body>
+    <h1>Palette Picker</h1>
+    <section class="palette">
+      <div class="control-container">
+        <button id="generate-new">Generate New Palette</button>
+        <form class="save-pal-form">
+          <select class="project-list" required>
+            <option value="" disabled selected hidden>Save to project...</option>
+          </select>
+          <input type="text" placeholder="Save Palette"/>
+          <button>Save</button>
+        </form>
+      </div>
+      <div id="colorwheel"></div>
+      <div class="project-form-container">
+        <h3>Create a new project</h3>
+        <form id="save-new-project">
+          <input
+            class="project-name-field"
+            type="text"
+            placeholder="project name"
+            required />
+          <button>Save</button>
+        </form>
+      </div>
+    </section>
+    <section>
+
+    </section>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="js/scripts.js" type="text/javascript"></script>
+    <script src="js/fetchCalls.js" type="text/javascript"></script>
+  </body>
+</html>
