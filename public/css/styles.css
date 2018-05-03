@@ -4,7 +4,7 @@
 }
 
 .palette {
-  display: table;
+  display: inline-table;
 }
 
 #big-circle {
@@ -58,8 +58,23 @@
   margin-bottom: 20px;
 }
 
-.project-form-container {
+.projects-and-palettes {
   display: inline-flex;
-  vertical-align: top;
   flex-direction: column;
+  vertical-align: top;
+}
+
+.project-form-container {
+  border-bottom: 1px solid white;
+}
+
+#save-new-project {
+  margin-bottom: 10px;
+}
+
+.project-palette-list-container {
+  text-align: center;
+}
+.project-palette-list-container h5 {
+  margin-top: 5px;
 }

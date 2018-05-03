@@ -41,8 +41,11 @@ function fillProjectSelect(projects) {
   })
 }
 
-function displayProjects() {
-  
+function displayProjects(projects) {
+  projects.forEach((project) => {
+    let newDisplay = `<h6>${project.title}</h6>`;
+    $('.project-palette-list-container').append(newDisplay)
+  })
 }
 
 function saveProjectToDb() {
