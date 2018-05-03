@@ -13,6 +13,16 @@ $("#save-new-project").submit(function() {
   saveProjectToDb();
 })
 
+$("#pal-save").click(function(event) {
+  event.preventDefault();
+  let palette = {};
+  palette["title"] = $("#palette-name").val();
+  for (let i=0; i<=4; i++) {
+    palette["color" + i] = $("#d" + i).css("border-top-color")
+  }
+  console.log(palette);
+})
+
 function makeColorWheel() {
   for (var i=0; i<5; i++) {
     let fillColor = randomHexColor();

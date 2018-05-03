@@ -10,13 +10,13 @@
     <section class="palette">
       <div class="control-container">
         <button id="generate-new">Generate New Palette</button>
-        <form class="save-pal-form">
-          <select class="project-list" required>
+        <!-- <form class="save-pal-form"> -->
+          <select class="project-list" >
             <option value="" disabled selected hidden>Save to project...</option>
           </select>
-          <input type="text" placeholder="Save Palette"/>
-          <button>Save</button>
-        </form>
+          <input id="palette-name" type="text" placeholder="Save Palette"/>
+          <button id="pal-save">Save</button>
+        <!-- </form> -->
       </div>
       <div id="colorwheel"></div>
     </section>
@@ -28,7 +28,8 @@
             class="project-name-field"
             type="text"
             placeholder="project name"
-            required />
+            required
+          />
           <button>Save</button>
         </form>
       </div>
