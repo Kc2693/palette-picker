@@ -9,18 +9,15 @@ $("#generate-new").click(function() {
   makeColorWheel();
 })
 
-$("#save-new-project").submit(function() {
+$("#save-new-project").submit(function(event) {
+  event.preventDefault();
   saveProjectToDb();
+  displayNewProject();
 })
 
-$("#pal-save").click(function(event) {
+$(".save-pal-form").submit(function(event) {
   event.preventDefault();
-  let palette = {};
-  palette["title"] = $("#palette-name").val();
-  for (let i=0; i<=4; i++) {
-    palette["color" + i] = $("#d" + i).css("border-top-color")
-  }
-  console.log(palette);
+  makePaletteObject();
 })
 
 function makeColorWheel() {
@@ -44,9 +41,19 @@ function colorSliceInfo(slice) {
    slice.append(`<div class="color-slice-info">🔒</div>`)
 }
 
+function makePaletteObject() {
+  let palette = {};
+  palette["title"] = $("#palette-name").val();
+  palette["projectID"] = $('.project-list').val();
+
+  for (let i=0; i<=4; i++) {
+    palette["color" + i] = $("#d" + i).css("border-top-color")
+  }
+}
+
 function fillProjectSelect(projects) {
   projects.forEach((project) => {
-    let newOption = `<option value=${project.title}>${project.title}</option>`
+    let newOption = `<option value=${project.id}>${project.title}</option>`;
     $('.project-list').append(newOption)
   })
 }
@@ -61,4 +68,10 @@ function displayProjects(projects) {
 function saveProjectToDb() {
   const projectName = $(".project-name-field").val()
   saveProject(projectName);
+}
+
+function displayNewProject() {
+  let newProject = $('.project-name-field').val()
+  let newDisplay = `<h6>${newProject}</h6>`;
+  $('.project-palette-list-container').append(newDisplay)
 }

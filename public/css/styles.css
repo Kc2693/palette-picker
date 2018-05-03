@@ -1,6 +1,7 @@
 * {
   background-color: #4c4c4c;
   color: white;
+  font-family: 'Merriweather Sans', sans-serif;
 }
 
 .palette {
@@ -77,4 +78,9 @@
 }
 .project-palette-list-container h5 {
   margin-top: 5px;
+  font-size: 22px;
+}
+.project-palette-list-container h6 {
+  margin-top: 5px;
+  font-size: 16px;
 }
