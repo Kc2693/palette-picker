@@ -9,15 +9,19 @@ $("#generate-new").click(function() {
   makeColorWheel();
 })
 
-$("#save-new-project").submit(function(event) {
+$("#save-new-project").submit(async function(event) {
   event.preventDefault();
-  saveProjectToDb();
+  await saveProjectToDb();
   displayNewProject();
+  const projectList = await getProjects();
+  resetProjectSelect();
+  fillProjectSelect(projectList);
 })
 
 $(".save-pal-form").submit(function(event) {
   event.preventDefault();
-  makePaletteObject();
+  const palette = makePaletteObject();
+  savePalette(palette);
 })
 
 function makeColorWheel() {
@@ -44,18 +48,31 @@ function colorSliceInfo(slice) {
 function makePaletteObject() {
   let palette = {};
   palette["title"] = $("#palette-name").val();
-  palette["projectID"] = $('.project-list').val();
+  palette["project_id"] = $('.project-list').val();
 
   for (let i=0; i<=4; i++) {
     palette["color" + i] = $("#d" + i).css("border-top-color")
   }
+  return palette
+}
+
+function saveProjectToDb() {
+  const projectName = $(".project-name-field").val()
+  saveProject(projectName);
 }
 
 function fillProjectSelect(projects) {
+  let defaultOption = `<option value="" disabled selected hidden>Save to project...</option>`;
+  $('.project-list').append(defaultOption);
+
   projects.forEach((project) => {
     let newOption = `<option value=${project.id}>${project.title}</option>`;
-    $('.project-list').append(newOption)
+    $('.project-list').append(newOption);
   })
+}
+
+function resetProjectSelect() {
+  $('.project-list').empty();
 }
 
 function displayProjects(projects) {
@@ -63,11 +80,6 @@ function displayProjects(projects) {
     let newDisplay = `<h6>${project.title}</h6>`;
     $('.project-palette-list-container').append(newDisplay)
   })
-}
-
-function saveProjectToDb() {
-  const projectName = $(".project-name-field").val()
-  saveProject(projectName);
 }
 
 function displayNewProject() {
