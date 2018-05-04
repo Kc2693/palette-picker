@@ -16,7 +16,13 @@
         <form class="save-pal-form">
           <select class="project-list" required>
           </select>
-          <input id="new-palette-name" type="text" placeholder="Palette Name" required/>
+          <input
+            id="new-palette-name"
+            type="text"
+            placeholder="Palette Name"
+            maxlength="10"
+            required
+          />
           <button>Save</button>
         </form>
       </div>
@@ -30,13 +36,14 @@
             class="project-name-field"
             type="text"
             placeholder="project name"
+            maxlength="10"
             required
           />
           <button>Save</button>
         </form>
       </div>
+      <h5 class="projects-heading">Projects:</h5>
       <div class="project-palette-list-container">
-        <h5>Projects:</h5>
       </div>
     </section>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

@@ -97,10 +97,10 @@ function makeMuffins(palettes, projectId) {
     let palColorsArr = paletteColorsArray(palette)
     let palColorElems = paletteColorsElements(palColorsArr)
     return(`
-      <div class="palette-container id='${palette.id}'>
-      <h6 class="pal-title">${palette.title}</h6>
-      <span class="delete-palette-btn">X</span>
+      <div class="palette-container id='c${palette.id}'">
+        <h6 class="pal-title"> ${palette.title} </h6>
         ${palColorElems}
+        <span class="delete-palette-btn">X</span>
       </div>
     `)
     }).join('')
