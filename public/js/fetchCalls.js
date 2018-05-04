@@ -1,6 +1,6 @@
 saveProject = async (projectName) => {
   try {
-    const initResponse = await fetch('http://localhost:3000/api/v1/projects', {
+    const initResponse = await fetch('/api/v1/projects', {
       method: 'POST',
       headers: {'Content-type': 'application/json'},
       body: JSON.stringify({title: projectName})
@@ -13,7 +13,7 @@ saveProject = async (projectName) => {
 
 getProjects = async () => {
   try {
-    const initResponse = await fetch('http://localhost:3000/api/v1/projects');
+    const initResponse = await fetch('/api/v1/projects');
     const projectList = initResponse.json();
 
     return projectList;
@@ -24,7 +24,7 @@ getProjects = async () => {
 
 savePalette = async (palette) => {
   try {
-    const initResponse = await fetch('http://localhost:3000/api/v1/palettes', {
+    const initResponse = await fetch('/api/v1/palettes', {
       method: 'POST',
       headers: {'Content-type': 'application/json'},
       body: JSON.stringify(palette)
@@ -37,7 +37,7 @@ savePalette = async (palette) => {
 
 getPalettes = async () => {
   try {
-    const initResponse = await fetch('http://localhost:3000/api/v1/palettes');
+    const initResponse = await fetch('/api/v1/palettes');
     const paletteList = initResponse.json();
 
     return paletteList;
