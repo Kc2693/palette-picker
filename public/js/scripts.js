@@ -3,6 +3,7 @@ $( document ).ready(async function() {
     const projectList = await getProjects();
     fillProjectSelect(projectList);
     displayProjects(projectList);
+    displayPalette();
 });
 
 $("#generate-new").click(function() {
@@ -86,4 +87,28 @@ function displayNewProject() {
   let newProject = $('.project-name-field').val()
   let newDisplay = `<h6>${newProject}</h6>`;
   $('.project-palette-list-container').append(newDisplay)
+}
+
+async function displayPalette() {
+  const palettes = await getPalettes();
+
+  
+  makeColorSwatches(palettes);
+
+
+}
+async function makeColorSwatches(palettes) {
+  palettes.forEach((palette) => {
+    let keys = Object.keys(palette)
+    let paletteTitle = `<h6 class="pal-title">${palette.title}</h6>`;
+    let deleteBtn = `<span class="delete-palette-btn">X</span>`
+    $('.first-pal-homie').append(paletteTitle)
+    keys.forEach((key) => {
+      if (key.includes('color')) {
+        let newColor = `<span class="pal-colors" style="background-color:${palette[key]}"></span>`;
+        $('.first-pal-homie').append(newColor)
+      }
+    })
+    $('.first-pal-homie').append(deleteBtn)
+  })
 }

@@ -35,3 +35,14 @@ savePalette = async (palette) => {
     return error.message
   }
 }
+
+getPalettes = async () => {
+  try {
+    const initResponse = await fetch('http://localhost:3000/api/v1/palettes');
+    const paletteList = initResponse.json();
+
+    return paletteList;
+  } catch (error) {
+    return error.message
+  }
+}
