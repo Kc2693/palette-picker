@@ -10,4 +10,12 @@ module.exports = {
     },
     useNullAsDefault: true
   },
+  testing: {
+    client: 'pg',
+    connection: 'postgres://localhost/palette_test',
+    migrations: {
+      directory: './db/migrations'
+    },
+    useNullAsDefault: true
+  },
 };
