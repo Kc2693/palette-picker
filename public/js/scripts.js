@@ -9,8 +9,19 @@ $("#generate-new").click(function() {
   makeColorWheel();
 })
 
-$("#save-new-project").submit(function() {
-  saveProjectToDb();
+$("#save-new-project").submit(async function(event) {
+  event.preventDefault();
+  await saveProjectToDb();
+  displayNewProject();
+  const projectList = await getProjects();
+  resetProjectSelect();
+  await fillProjectSelect(projectList);
+})
+
+$(".save-pal-form").submit(function(event) {
+  event.preventDefault();
+  const palette = makePaletteObject();
+  savePalette(palette);
 })
 
 function makeColorWheel() {
@@ -34,21 +45,97 @@ function colorSliceInfo(slice) {
    slice.append(`<div class="color-slice-info">🔒</div>`)
 }
 
-function fillProjectSelect(projects) {
-  projects.forEach((project) => {
-    let newOption = `<option value=${project.title}>${project.title}</option>`
-    $('.project-list').append(newOption)
-  })
-}
+function makePaletteObject() {
+  let palette = {};
+  palette["title"] = $("#new-palette-name").val();
+  palette["project_id"] = $('.project-list').val();
 
-function displayProjects(projects) {
-  projects.forEach((project) => {
-    let newDisplay = `<h6>${project.title}</h6>`;
-    $('.project-palette-list-container').append(newDisplay)
-  })
+  for (let i=0; i<=4; i++) {
+    palette["color" + i] = $("#d" + i).css("border-top-color")
+  }
+  return palette
 }
 
 function saveProjectToDb() {
   const projectName = $(".project-name-field").val()
   saveProject(projectName);
+}
+
+function fillProjectSelect(projects) {
+  let defaultOption = `<option value="" disabled selected hidden>Save to project...</option>`;
+  $('.project-list').append(defaultOption);
+
+  projects.forEach((project) => {
+    let newOption = `<option value=${project.id}>${project.title}</option>`;
+    $('.project-list').append(newOption);
+  })
+}
+
+function resetProjectSelect() {
+  $('.project-list').empty();
+}
+
+async function displayProjects(projects) {
+  const palettes = await getPalettes();
+  const projectsDone = await projects.map((project) => {
+    const projectPalettes = matchPaletteToProject(palettes, project.id);
+    return (`
+      <div class="project-divs">
+        <h6 class="project-title">${project.title}</h6>
+        <div>${makeMuffins(palettes, project.id)}</div>
+      </div>
+      `)
+  })
+  $('.project-palette-list-container').append(projectsDone)
+
+}
+
+function makeMuffins(palettes, projectId) {
+  const projectPalettes = matchPaletteToProject(palettes, projectId);
+
+  return projectPalettes.map((palette, i) => {
+    let palColorsArr = paletteColorsArray(palette)
+    let palColorElems = paletteColorsElements(palColorsArr)
+    return(`
+      <div class="palette-container id='c${palette.id}'">
+        <h6 class="pal-title"> ${palette.title} </h6>
+        ${palColorElems}
+        <span class="delete-palette-btn">X</span>
+      </div>
+    `)
+    }).join('')
+}
+
+function matchPaletteToProject(palettes, projectId) {
+  const connected = palettes.filter((palette) => {
+      if (projectId === palette.project_id) {
+        return palette
+      }
+  })
+  return connected;
+}
+
+function paletteColorsArray(palette) {
+  let keys = Object.keys(palette)
+
+  return keys.reduce((accu, key) => {
+    if (key.includes('color')) {
+    accu.push(palette[key])
+    }
+    return accu
+  },[])
+}
+
+function paletteColorsElements(palColors) {
+  return palColors.map((color) => {
+    return(`
+      <span class="pal-colors" style="background-color:${color}"></span>
+      `)
+  }).join('')
+}
+
+function displayNewProject() {
+  let newProject = $('.project-name-field').val()
+  let newDisplay = `<h6>${newProject}</h6>`;
+  $('.project-palette-list-container').append(newDisplay)
 }
