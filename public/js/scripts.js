@@ -3,7 +3,6 @@ $( document ).ready(async function() {
     const projectList = await getProjects();
     fillProjectSelect(projectList);
     displayProjects(projectList);
-    displayPalette();
 });
 
 $("#generate-new").click(function() {
@@ -16,7 +15,7 @@ $("#save-new-project").submit(async function(event) {
   displayNewProject();
   const projectList = await getProjects();
   resetProjectSelect();
-  fillProjectSelect(projectList);
+  await fillProjectSelect(projectList);
 })
 
 $(".save-pal-form").submit(function(event) {
@@ -48,7 +47,7 @@ function colorSliceInfo(slice) {
 
 function makePaletteObject() {
   let palette = {};
-  palette["title"] = $("#palette-name").val();
+  palette["title"] = $("#new-palette-name").val();
   palette["project_id"] = $('.project-list').val();
 
   for (let i=0; i<=4; i++) {
@@ -76,39 +75,67 @@ function resetProjectSelect() {
   $('.project-list').empty();
 }
 
-function displayProjects(projects) {
-  projects.forEach((project) => {
-    let newDisplay = `<h6>${project.title}</h6>`;
-    $('.project-palette-list-container').append(newDisplay)
+async function displayProjects(projects) {
+  const palettes = await getPalettes();
+  const projectsDone = await projects.map((project) => {
+    const projectPalettes = matchPaletteToProject(palettes, project.id);
+    return (`
+      <div class="project-divs">
+        <h6 class="project-title">${project.title}</h6>
+        <div>${makeMuffins(palettes, project.id)}</div>
+      </div>
+      `)
   })
+  $('.project-palette-list-container').append(projectsDone)
+
+}
+
+function makeMuffins(palettes, projectId) {
+  const projectPalettes = matchPaletteToProject(palettes, projectId);
+
+  return projectPalettes.map((palette, i) => {
+    let palColorsArr = paletteColorsArray(palette)
+    let palColorElems = paletteColorsElements(palColorsArr)
+    return(`
+      <div class="palette-container id='${palette.id}'>
+      <h6 class="pal-title">${palette.title}</h6>
+      <span class="delete-palette-btn">X</span>
+        ${palColorElems}
+      </div>
+    `)
+    }).join('')
+}
+
+function matchPaletteToProject(palettes, projectId) {
+  const connected = palettes.filter((palette) => {
+      if (projectId === palette.project_id) {
+        return palette
+      }
+  })
+  return connected;
+}
+
+function paletteColorsArray(palette) {
+  let keys = Object.keys(palette)
+
+  return keys.reduce((accu, key) => {
+    if (key.includes('color')) {
+    accu.push(palette[key])
+    }
+    return accu
+  },[])
+}
+
+function paletteColorsElements(palColors) {
+  return palColors.map((color) => {
+    return(`
+      <span class="pal-colors" style="background-color:${color}"></span>
+      `)
+  }).join('')
 }
 
 function displayNewProject() {
   let newProject = $('.project-name-field').val()
   let newDisplay = `<h6>${newProject}</h6>`;
   $('.project-palette-list-container').append(newDisplay)
-}
-
-async function displayPalette() {
-  const palettes = await getPalettes();
-
-  
-  makeColorSwatches(palettes);
-
-
-}
-async function makeColorSwatches(palettes) {
-  palettes.forEach((palette) => {
-    let keys = Object.keys(palette)
-    let paletteTitle = `<h6 class="pal-title">${palette.title}</h6>`;
-    let deleteBtn = `<span class="delete-palette-btn">X</span>`
-    $('.first-pal-homie').append(paletteTitle)
-    keys.forEach((key) => {
-      if (key.includes('color')) {
-        let newColor = `<span class="pal-colors" style="background-color:${palette[key]}"></span>`;
-        $('.first-pal-homie').append(newColor)
-      }
-    })
-    $('.first-pal-homie').append(deleteBtn)
-  })
 }

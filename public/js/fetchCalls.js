@@ -30,7 +30,6 @@ savePalette = async (palette) => {
       body: JSON.stringify(palette)
     });
     const newPalette = initResponse.json();
-    console.log(newPalette);
   } catch (error) {
     return error.message
   }

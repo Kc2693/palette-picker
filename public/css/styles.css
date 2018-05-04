@@ -7,6 +7,18 @@
 .palette {
   display: inline-table;
 }
+.save-pal-form {
+  width: 230px;
+}
+.save-pal-form button {
+  display: block;
+  margin: 5px auto 0 auto;
+  width: 50%;
+}
+#new-palette-name {
+  text-align: center;
+  width: 100px;
+}
 
 #big-circle {
   background-color: transparent;
@@ -34,9 +46,9 @@
   left: 420px;
 	width: 0;
 	height: 0;
-	border-left: 50px solid transparent;
-	border-right: 50px solid transparent;
-  border-top: 200px solid;
+	border-left: 80px solid transparent;
+	border-right: 80px solid transparent;
+  border-top: 250px solid;
   transform-origin: -100px 50%;
 }
 
@@ -52,10 +64,17 @@
   flex-direction: column;
   height: 80px;
   vertical-align: middle;
+  text-align: center;
   width: 200px;
 }
 
+.control-container h6 {
+  font-size: 16px;
+  margin: 0;
+}
+
 #generate-new {
+  font-size: 16px;
   margin-bottom: 20px;
 }
 
@@ -77,19 +96,19 @@
   text-align: center;
 }
 .project-palette-list-container h5 {
-  margin-top: 5px;
+  margin: 5px 0 10px 0;
   font-size: 22px;
 }
-.project-palette-list-container h6 {
-  margin-top: 5px;
+.project-title {
+  margin: 5px 0 0 0;
   font-size: 16px;
 }
 
-.first-pal-homie {
+.project-divs {
   border: 1px solid white;
-  height: 25px;
-  width: 195px;
+  margin-bottom: 5px;
 }
+
 .pal-title {
   display: inline-block;
   margin: 0 5px 13px 5px;
