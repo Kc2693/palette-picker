@@ -18,10 +18,11 @@ $("#save-new-project").submit(async function(event) {
   await fillProjectSelect(projectList);
 })
 
-$(".save-pal-form").submit(function(event) {
+$(".save-pal-form").submit(async function(event) {
   event.preventDefault();
-  const palette = makePaletteObject();
+  const palette = await makePaletteObject();
   savePalette(palette);
+  displayProjects(projectList);
 })
 
 function makeColorWheel() {
@@ -78,19 +79,17 @@ function resetProjectSelect() {
 async function displayProjects(projects) {
   const palettes = await getPalettes();
   const projectsDone = await projects.map((project) => {
-    const projectPalettes = matchPaletteToProject(palettes, project.id);
     return (`
       <div class="project-divs">
         <h6 class="project-title">${project.title}</h6>
-        <div>${makeMuffins(palettes, project.id)}</div>
+        <div>${makeProjectPalettes(palettes, project.id)}</div>
       </div>
       `)
   })
   $('.project-palette-list-container').append(projectsDone)
-
 }
 
-function makeMuffins(palettes, projectId) {
+function makeProjectPalettes(palettes, projectId) {
   const projectPalettes = matchPaletteToProject(palettes, projectId);
 
   return projectPalettes.map((palette, i) => {
