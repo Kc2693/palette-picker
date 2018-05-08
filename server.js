@@ -9,11 +9,7 @@ app.locals.title = 'Palette Picker';
 app.set('port', process.env.PORT || 3000);
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'));
-
-app.get('/', (request, response) => {
-});
+app.use('/', express.static('public'));
 
 app.get('/api/v1/projects', async (request, response) => {
   try {

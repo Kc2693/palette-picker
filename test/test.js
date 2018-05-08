@@ -1,6 +1,5 @@
 const chai = require('chai');
 const should = chai.should();
-const server = require('../server');
 const chaiHttp = require('chai-http');
 const { app, database } = require('../server.js');
 
@@ -8,7 +7,7 @@ chai.use(chaiHttp);
 
 describe("Root url requests", () => {
   it("should server static assets and return status code 200", (done) => {
-    chai.request(server).get('/').end((err, response) => {
+    chai.request(app).get('/').end((err, response) => {
       response.should.be.html;
       response.should.have.status(200);
       done();
@@ -16,7 +15,7 @@ describe("Root url requests", () => {
   });
 
   it("should return 404 for unknown route", (done) => {
-    chai.request(server).get('/spooky').end((err, response) => {
+    chai.request(app).get('/spooky').end((err, response) => {
       response.should.have.status(404);
       done();
     });
@@ -40,7 +39,7 @@ describe("Projects requests", () => {
 
   describe("GET", () => {
     it("should return an array and status code 200", (done) => {
-      chai.request(server).get('/api/v1/projects').end((err, response) => {
+      chai.request(app).get('/api/v1/projects').end((err, response) => {
         response.should.be.json;
         response.body.should.be.a('array');
         // response.body.should.have.a.lengthOf(3);
@@ -54,7 +53,7 @@ describe("Projects requests", () => {
 
   describe("POST", () => {
     it("should add a project", (done) => {
-      chai.request(server).post('/api/v1/projects').send({title: 'phoenix'}).end((err, response) => {
+      chai.request(app).post('/api/v1/projects').send({title: 'phoenix'}).end((err, response) => {
         response.should.have.status(201);
         response.should.be.json;
         // response.body.should.be.a('object');
