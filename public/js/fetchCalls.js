@@ -2,7 +2,10 @@ saveProject = async (projectName) => {
   try {
     const initResponse = await fetch('/api/v1/projects', {
       method: 'POST',
-      headers: {'Content-type': 'application/json'},
+      headers: {
+        'Content-type': 'application/json',
+        'Accept':'application/json'
+      },
       body: JSON.stringify({title: projectName})
     });
     const newProject = initResponse.json();
@@ -26,7 +29,10 @@ savePalette = async (palette) => {
   try {
     const initResponse = await fetch('/api/v1/palettes', {
       method: 'POST',
-      headers: {'Content-type': 'application/json'},
+      headers: {
+        'Content-type': 'application/json',
+        'Accept':'application/json',
+      },
       body: JSON.stringify(palette)
     });
     const newPalette = initResponse.json();
