@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Kc2693/palette-picker.svg?branch=master)](https://travis-ci.org/Kc2693/palette-picker)
+
 # Palette-picker
 
 This was a 5-day project to learn the basics of PostgreSQL/Knex/Express to build a backend server & light front-end application (JS/HTML/CSS).  
