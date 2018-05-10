@@ -24,18 +24,18 @@ describe("Root url requests", () => {
 });
 
 describe("Projects requests", () => {
-  beforeEach(function(done) {
-    database.migrate.rollback()
-    .then(function() {
-      database.migrate.latest()
-      .then(function() {
-        return database.seed.run()
-        .then(function() {
-          done();
-        });
-      });
-    });
-  });
+  // beforeEach(function(done) {
+  //   database.migrate.rollback()
+  //   .then(function() {
+  //     database.migrate.latest()
+  //     .then(function() {
+  //       return database.seed.run()
+  //       .then(function() {
+  //         done();
+  //       });
+  //     });
+  //   });
+  // });
 
   describe("GET", () => {
     it("should return an array and status code 200", (done) => {
