@@ -23,7 +23,7 @@ describe("Root url requests", () => {
   // sad path test
 });
 
-describe("Projects requests", () => {
+describe.skip("Projects requests", () => {
   // beforeEach(function(done) {
   //   database.migrate.rollback()
   //   .then(function() {
