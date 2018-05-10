@@ -9,4 +9,4 @@ deploy:
   provider: heroku
   api_key:
     secure: o0cQszjrGdZ0KHBDg3/MR5VIRRg5TwT/FlilVErE/ejE22nDAnItxZ+9Zsd6qs0vaJoT+PfEPbUeG5XO+0ochYjUjSbaw2Z9nl4I71273MGC3O2q8O/5hSbywgXXTtnTzo9HEgZQU6+7nCo0ZavtkxLMvQbDUtQRT0mYSoZePO8QbkcXWYVez0nIHEX+RWIHK5HhZ/6ff6FVzCjeb1U5+MkOHNNjRjZ/nYBT2KB729t8LZaH4InUYHNuiDO1tTzMB6UGr2mvKT8DIVCREe7GOphWnXgHzRJWzaqYchggnBoDCGmyWEY69lknhBIqER0oVEmfFQ7OUMZo0BchsSt7a6eebh4BwnGhJWCPcfW7PEeGsa5Fjsni5v9Lp1Q+1/BYnCXN9+taBiUTA6qYeQN+QC4fyOeZiJQRcr03sBsga/03lTt3ybJivVld2WGXil+hRjXTf76OPzz+QGnCF4zzQ+hfopbFTaWP6fGSZl1kX3gRLqqiA+Du5tIOysFJ3xx3mpHyj6Mg2ax5axpbYZKMOoakehB/R0fl9DlckIIxe8WHkYtIPHHI/jJb8psDMsz1HEEQx4baB59/y76uqM/sGsyuYCzmq7BmueWW5up0wYraSjesoAVhfSkEkGKhajUVfOXGo4291xjZtdQe+i44CYPl217NKft9g/m3KIQt9j0=
-  app: https://kc-palette-picker.herokuapp.com/
+  app: kc-palette-picker.herokuapp.com
